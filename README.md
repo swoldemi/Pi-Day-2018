@@ -1,9 +1,7 @@
 [![](https://img.shields.io/badge/python-3.6.3-blue.svg)](https://www.python.org/downloads/release/python)
 
 # Let's Memorize 1 Billion Digits of Pi  :grin: :thumbsup: :joy: :ok: :no_good:
-<p align="center">
-  <img style="width: 50%" src="https://i.imgur.com/Iv1loEx.gif">
-</p>
+
 1) Copy this repository
 ```
 git clone https://github.com/swoldemi/Pi-Day-2018
@@ -24,6 +22,6 @@ cd src
 python app.py
 ```
 
-5) Navigate to localhost:8050 in your browser
+5) Navigate to `localhost:8050` in your browser
 
-6) :eyes:
+6) :eyes: (i.e. https://imgur.com/H0fLY9E.gif)
