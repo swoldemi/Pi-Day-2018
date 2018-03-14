@@ -25,10 +25,11 @@ class DashVisualizer():
 		self.data_length = len(self.pi_data)
 		self.y_axis = deque(maxlen=150)
 		self.x_axis = deque(maxlen=150)
+		self.count = 0
 
 		@self.app.callback(Output('live-pi-graph', 'figure'), 
 							events=[Event('update-graph', 'interval')])
-		def updateBarGraph():
+		def updateGraph():
 			if self.ix < self.data_length:
 				self.x_axis.append(self.ix)
 				self.y_axis.append(self.pi_data[self.ix])
@@ -44,6 +45,10 @@ class DashVisualizer():
 		def printPi():
 			if self.ix-1 < self.data_length:
 				self.pi_string = self.pi_string + self.pi_data[self.ix-1]
+				self.count +=1
+				if self.count > 2:
+					self.pi_string = self.pi_string + '\n'
+					self.count = 0
 				return self.pi_string
 
 		@self.app.callback(Output(component_id='digit-count', component_property='children'), 
