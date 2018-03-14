@@ -1,2 +1,5 @@
 src/__pycache__/DashDataVisualization.cpython-36.pyc
 desktop.ini
+venv
+.DS_Store
+.env
