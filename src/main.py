@@ -7,8 +7,8 @@ def main():
 		pi_digits.close()
 
 	dasher = DashVisualizer(digits)
-	server = dasher.app.server
 	dasher.app.run_server(debug=True)
+	return dasher.app.server
 	
 if __name__ == '__main__':
-	main()
+	server = main()
