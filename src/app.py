@@ -8,4 +8,5 @@ if __name__ == '__main__':
 
 	dasher = DashVisualizer(digits)
 	server = dasher.app.server
-	dasher.app.run_server(debug=True)
+	app = dasher.app
+	app.run_server(debug=True)
