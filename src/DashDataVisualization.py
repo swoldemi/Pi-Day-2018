@@ -15,15 +15,17 @@ class DashVisualizer():
 		self.app = dash.Dash(__name__)
 		self.app.layout = dhtml.Div([
 				dcc.Graph(id='live-pi-graph', animate=True),
-				dcc.Interval(id='update-graph', interval=300),
-				dhtml.Output(id='pi-output')])
+				dcc.Interval(id='update-graph', interval=900),
+				dhtml.Output(id='pi-output'),
+				dhtml.Div([dhtml.Output(id='digit-count')])])
 		self.ix = 0
-		self.pi_string = ''
+		self.pi_string = '3.'
+		self.digit_counter = 'Digits printed: {}'.format(len(self.pi_string)-2)
 		self.pi_data = pi_data[2:] #Skip '3.'
 		self.data_length = len(self.pi_data)
 		self.y_axis = deque(maxlen=150)
 		self.x_axis = deque(maxlen=150)
-		
+
 		@self.app.callback(Output('live-pi-graph', 'figure'), 
 							events=[Event('update-graph', 'interval')])
 		def updateBarGraph():
@@ -36,10 +38,16 @@ class DashVisualizer():
 				return {'data': [data], 'layout': pgo.Layout(title='Pi Day 2018 by @swoldemi', xaxis=dict(range=[min(self.x_axis), max(self.x_axis)]), yaxis=dict(range=[0, 12]), autosize=True)}
 			else:
 				sys.exit(0)
+
 		@self.app.callback(Output(component_id='pi-output', component_property='children'), 
 		events=[Event('update-graph', 'interval')])
 		def printPi():
 			if self.ix-1 < self.data_length:
 				self.pi_string = self.pi_string + self.pi_data[self.ix-1]
 				return self.pi_string
-			
+
+		@self.app.callback(Output(component_id='digit-count', component_property='children'), 
+		events=[Event('update-graph', 'interval')])
+		def displayDigitCount():
+			self.digit_counter = 'Digits printed: {}'.format(len(self.pi_string)-2)
+			return self.digit_counter
